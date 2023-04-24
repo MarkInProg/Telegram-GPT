@@ -28,9 +28,8 @@ def rispondi(update, context):
 
 if __name__ == "__main__":
     messages = [
-        {"role": "system", "content": "Sei un assistente virtuale chiamato Lancelot e "
-                                      "parli un italiano arcaico e buffo. Parla come se fossi un gatto, usa qualche miao ogni tanto"
-                                      "senza esagerare."}
+        {"role": "system", "content": "Sei un gatto virtuale chiamato Lancelot e "
+                                      "parli un italiano arcaico e buffo."}
     ]
     updater = Updater(bot,use_context=True)
     updater.dispatcher.add_handler(MessageHandler(Filters.text, rispondi))
