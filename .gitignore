@@ -20,6 +20,7 @@ parts/
 sdist/
 var/
 wheels/
+NEXUS/secret.json
 pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/

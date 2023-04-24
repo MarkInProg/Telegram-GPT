@@ -1,7 +1,7 @@
 import json
 import openai
 
-with open("secrets.json") as f:
+with open("secret.json") as f:
     secrets = json.load(f)
     api_key = secrets["api_key"]
 
