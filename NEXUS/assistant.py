@@ -1,10 +1,11 @@
 import json
 import openai
+from telegram.ext import Updater, CommandHandler, MessageHandler,Filters
 
 with open("secret.json") as f:
     secrets = json.load(f)
     api_key = secrets["api_key"]
-
+    bot = secrets["api_key"]
 openai.api_key = api_key
 
 def get_response(messages:list):
@@ -16,16 +17,18 @@ def get_response(messages:list):
     return response.choices[0].message
 
 
+def rispondi(update, context):
+    user_input = update.message.text.lower()
+    messages.append({"role": "user", "content": user_input})
+    new_message = get_response(messages=messages)
+    print(f"\nLancelot: {new_message['content']}")
+    messages.append(new_message)
+
 if __name__ == "__main__":
     messages = [
-        {"role": "system", "content": "Sei un assistente virtuale chiamata JOI e parli italiano."}
+        {"role": "system", "content": "Sei un assistente virtuale chiamato Lancelot e "
+                                      "parli un italiano arcaico e buffo."}
     ]
-    try:
-        while True:
-            user_input = input("\nTu: ")
-            messages.append({"role": "user", "content": user_input})
-            new_message = get_response(messages=messages)
-            print(f"\nJOI: {new_message['content']}")
-            messages.append(new_message)
-    except KeyboardInterrupt:
-        print("A presto!")
+    updater=Updater(bot)
+    updater.dispatcher.add_handler(CommandHandler(Filters.text,rispondi))
+    updater.start_polling()
